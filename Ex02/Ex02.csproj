@@ -35,5 +35,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BullseyeSingleGameLogic.cs" />
+    <Compile Include="BullseyeGameManager.cs" />
+    <Compile Include="InputValidator.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="UserInterfaceConsole.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
