@@ -50,7 +50,7 @@ namespace Ex02
             }
             return hasDuplicates;
         }
-        public static bool IsValidInput(string i_input)
+        public static bool IsValidSequence(string i_input)
         {
             bool isValid = false;
             if(isValidLength(i_input)&&containsOnlyValidChars(i_input)&& hasNoDuplicates(i_input))
