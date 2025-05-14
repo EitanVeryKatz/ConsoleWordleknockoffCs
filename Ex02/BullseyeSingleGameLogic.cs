@@ -58,29 +58,37 @@ namespace Ex02
         //    }
         //}
 
-
-
-        //internal void CheckGuess(string i_Guess,out int io_Hits, out int io_Misses)
-        //{
-        //    io_Hits = 0;
-        //    io_Misses = 0;
-        //    for (int i = 0; i < 4; i++)
-        //    {
-
-        //        bool isInSequance = SequanceMap.TryGetValue(i_Guess[i], out int Index);
-        //        if (isInSequance == true)
-        //        {
-        //            if(Index == i)
-        //            {
-        //                io_Hits++;
-        //            }
-        //            else
-        //            {
-        //                io_Misses++;
-        //            }
-        //        }
-        //    }
-        //}
+        internal void GenerateSecretSequance()//TODO
+        {
+            //Random m_sequenceItemRandomizer = new Random();
+            //Type[] sequance = new Type[4];
+            //do
+            //{
+            //    for (int i = 0; i < 4; i++)
+            //    {
+            //        sequance[i] = (Type)m_sequenceItemRandomizer.Next(0, 8);
+            //    }
+            //} while (InputValidator.IsValidSequence(sequance) == false);
+            //m_secretSequance = sequance;
+        }
+        internal void CheckGuess(Type[] i_guess)
+        {
+            Guess currentGuess = new Guess();
+            currentGuess.m_guess = i_guess;
+            m_guessList.Add(currentGuess);
+            CurrentGuessCount++;
+            for (int i = 0; i < 4; i++)
+            {
+                if (m_secretSequance[i].Equals(i_guess[i]))
+                {
+                    currentGuess.Hits++;
+                }
+                else
+                {
+                    currentGuess.Misses++;
+                }
+            }
+        }
 
 
 

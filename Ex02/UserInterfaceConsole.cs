@@ -3,27 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ex02.ConsoleUtils;//dll for console utils made by Guy Ronen
 
 namespace Ex02
 {
     internal class UserInterfaceConsole
     {
         private const string c_stopPlaying = "Q";
-        
+
         private InputValidator m_validator = new InputValidator();
         private BullseyeSingleGameLogic<char> m_gameLogic = new BullseyeSingleGameLogic<char>();
         private bool m_winFlag = false;
         private bool m_lossFlag = false;
         private Random m_sequenceItemRandomizer = new Random();
 
-        private void setUpSingleGame() {
+        private void setUpSingleGame()
+        {
             m_gameLogic.SetUpNewGame();
             //will use private methods of gamelogic to
             //do all setup job for the new game
             generateSequance();
             askPlayerForNumOfGuesses();
             //also updated the gamelogic
-            printScreen();
+            PrintBoard();
         }
 
         public void Run()
@@ -32,7 +34,7 @@ namespace Ex02
             runGameLoop();
         }
 
-       
+
 
         private void runGameLoop()
         {
@@ -51,7 +53,7 @@ namespace Ex02
                 //of past guesses and hits and misses and shit
                 //to print current state of game
                 if (m_winFlag == true || m_lossFlag == true)
-                    //if game ended
+                //if game ended
                 {
                     if (askToPlayAgain() == true)
                     {
@@ -78,12 +80,12 @@ namespace Ex02
             } while (m_validator.IsValidSequence(sequance) == false);
             m_gameLogic.setSecretSequance(sequance);
         }
-        
+
         private void askPlayerForNumOfGuesses()
         {
             Console.WriteLine("Please enter amount of guesses: ");
             string userInputStr = Console.ReadLine();
-            if(int.TryParse(userInputStr,out int userInputInt) == false)
+            if (int.TryParse(userInputStr, out int userInputInt) == false)
             {
                 Console.WriteLine("Invalid input...");
                 Console.WriteLine("Please enter amount of guesses: ");
@@ -93,12 +95,12 @@ namespace Ex02
 
         }
 
-        private void askUserInput()
+        private string askUserInput()
         {
             char[] userGess = new char[4];
             Console.WriteLine("Please type your next guess<A B C D> or 'Q' to quit:");
             string userInputStr = Console.ReadLine();
-            
+            return userInputStr;
         }
 
         private bool askToPlayAgain()
@@ -115,7 +117,7 @@ namespace Ex02
 
         private void PrintBoard()
         {
-            Console.Clear();
+            Screen.Clear();//dll for console utils made by Guy Ronen
             Console.WriteLine("|Pins:    |Result:|");
             Console.WriteLine("|=========|=======|");
             Console.WriteLine("| # # # # |       |");
@@ -144,6 +146,20 @@ namespace Ex02
             }
         }
 
-
+        private void finishGame()//TO DO
+        {
+            //if (m_winFlag == true)
+            //{
+            //    Console.WriteLine("You win!");
+            //}
+            //else if (m_lossFlag == true)
+            //{
+            //    Console.WriteLine("You lose!");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Game ended.");
+            //}
+        }
     }
 }
