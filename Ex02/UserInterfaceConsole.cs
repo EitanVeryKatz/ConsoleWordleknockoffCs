@@ -8,12 +8,64 @@ namespace Ex02
 {
     internal class UserInterfaceConsole
     {
-        internal static void ShowWelcome();
-        internal static string GetUserGuess();
-        internal static void ShowGuessResult(string i_guess, int i_hits);
-        internal static void ShowGameOver(string i_correctSequence);
-        internal static void ClearScreen();
-        internal static void PrintBoard();
+        private const string c_stopPlaying = "Q";
+        
+        private InputValidator m_validator = new InputValidator();
+        private BullseyeSingleGameLogic m_gameLogic = new BullseyeSingleGameLogic();
+        private bool m_winFlag = false;
+        private bool m_lossFlag = false;
+
+        private void setUpSingleGame() {
+            m_gameLogic.SetUpNewGame();
+            //will use private methods of gamelogic to
+            //do all setup job for the new game
+            askPlayerForNumOfGuesses();
+            //also updated the gamelogic
+            printScreen();
+        }
+
+        public void Run()
+        {
+            runGameLoop();
+        }
+
+        public UserInterfaceConsole()
+        {
+            setUpSingleGame();
+        }
+
+        private void runGameLoop()
+        {
+            while (true)
+            {
+                string userInput = askUserInput();
+                //ask user input uses inputVallidator internally
+                if (userInput == c_stopPlaying)
+                {
+                    break;
+                }
+                m_gameLogic.CheckGuess(userInput, out m_winFlag, out m_lossFlag);
+                //need to update check guess
+                PrintBoard();
+                //uses data from game logic that will sore info
+                //of past guesses and hits and misses and shit
+                //to print current state of game
+                if (m_winFlag == true || m_lossFlag == true)
+                    //if game ended
+                {
+                    if (askToPlayAgain() == true)
+                    {
+                        setUpSingleGame();
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            finishGame();
+        }
+
         
 
     }

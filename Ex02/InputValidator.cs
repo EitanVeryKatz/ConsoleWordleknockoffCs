@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ex02
 {
-    static class InputValidator
+    internal class InputValidator
     {
-        private static bool isValidLength(string i_input)
+        private bool isValidLength(string i_input)
         {
             bool validLength = false;
             if (i_input.Length == 4)
@@ -17,7 +17,7 @@ namespace Ex02
             }
             return validLength;
         }
-        private static bool containsOnlyValidChars(string i_input) {
+        private bool containsOnlyValidChars(string i_input) {
             bool validChars = true;
             for(int i = 0; i < 4; i++)
             {
@@ -30,7 +30,7 @@ namespace Ex02
             }
             return validChars;
         }
-        private static bool hasNoDuplicates(string i_input) { 
+        private bool hasNoDuplicates(string i_input) { 
             bool hasDuplicates = false;
             bool[] ArrayOfLetters=new bool[8];
             for(int i = 0;i < 4;i++)
@@ -50,7 +50,7 @@ namespace Ex02
             }
             return hasDuplicates;
         }
-        public static bool IsValidSequence(string i_input)
+        public bool IsValidSequence(string i_input)
         {
             bool isValid = false;
             if(isValidLength(i_input)&&containsOnlyValidChars(i_input)&& hasNoDuplicates(i_input))
