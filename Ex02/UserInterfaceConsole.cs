@@ -101,5 +101,49 @@ namespace Ex02
             
         }
 
+        private bool askToPlayAgain()
+        {
+            bool playAgain = false;
+            Console.WriteLine("Would you like to start a new game? (Y/N)");
+            string userInputStr = Console.ReadLine();
+            if (userInputStr == "Y" || userInputStr == "y")
+            {
+                playAgain = true;
+            }
+            return playAgain;
+        }
+
+        private void PrintBoard()
+        {
+            Console.Clear();
+            Console.WriteLine("|Pins:    |Result:|");
+            Console.WriteLine("|=========|=======|");
+            Console.WriteLine("| # # # # |       |");
+            Console.WriteLine("|=========|=======|");
+            for (int i = 0; i < m_gameLogic.CurrentGuessCount; i++)
+            {
+                var guess = m_gameLogic.m_guessList[i];
+                // Print guessed pins
+                Console.Write("| {0} {1} {2} {3} |",
+                    guess.m_guess[0],
+                    guess.m_guess[1],
+                    guess.m_guess[2],
+                    guess.m_guess[3]);
+                // Print result (Hits and Misses)
+                Console.Write("|");
+                for (int j = 0; j < guess.Hits; j++)
+                {
+                    Console.Write(" V");
+                }
+                for (int j = 0; j < guess.Misses; j++)
+                {
+                    Console.Write(" X");
+                }
+                Console.WriteLine(" |");
+                Console.WriteLine("|=========|=======|");
+            }
+        }
+
+
     }
 }
