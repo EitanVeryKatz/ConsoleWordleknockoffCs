@@ -11,9 +11,10 @@ namespace Ex02
         private const string c_stopPlaying = "Q";
         
         private InputValidator m_validator = new InputValidator();
-        private BullseyeSingleGameLogic m_gameLogic = new BullseyeSingleGameLogic();
+        private BullseyeSingleGameLogic<char> m_gameLogic = new BullseyeSingleGameLogic<char>();
         private bool m_winFlag = false;
         private bool m_lossFlag = false;
+        private Random m_sequenceItemRandomizer = new Random();
 
         private void setUpSingleGame() {
             m_gameLogic.SetUpNewGame();
@@ -66,7 +67,18 @@ namespace Ex02
             finishGame();
         }
 
+        private void generateSequance()
+        {
+            char[] sequance = new char[4];
+            do
+            {
+                for (int i = 0; i < sequance.Length; i++)
+                {
+                    sequance[i] = (char)m_sequenceItemRandomizer.Next('A', 'I');
+                }
+            } while (m_validator.IsValidSequence(sequance) == false);
+            m_gameLogic.setSecretSequance(sequance);
+        }
         
-
     }
 }
