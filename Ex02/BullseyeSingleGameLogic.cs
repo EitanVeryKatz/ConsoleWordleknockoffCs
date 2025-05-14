@@ -10,13 +10,30 @@ namespace Ex02
     internal class BullseyeSingleGameLogic<Type>
     {
         private Type[] m_secretSequance = new Type[4];
-        public int MaxGuesses { get; private set; }
+        public int MaxGuesses { get; set; }
         public int CurrentGueseCount { get; private set; }
+
+        private class Guess
+        {
+            internal Type[] m_guess = new Type[4];
+            internal int Hits { get; set; }
+
+            internal int Misses { get; set; }
+        }
+
+        private List<Guess> m_guessList = new List<Guess>();
 
         public void setSecretSequance(Type[] i_sequanceItems)
         {
             m_secretSequance = i_sequanceItems;
         }
+
+        public void SetUpNewGame()
+        {
+            CurrentGueseCount = 0;
+            m_guessList.Clear();
+        }
+
 
         //internal void GenerateSecretSequance()
         //{

@@ -20,6 +20,7 @@ namespace Ex02
             m_gameLogic.SetUpNewGame();
             //will use private methods of gamelogic to
             //do all setup job for the new game
+            generateSequance();
             askPlayerForNumOfGuesses();
             //also updated the gamelogic
             printScreen();
@@ -27,13 +28,11 @@ namespace Ex02
 
         public void Run()
         {
+            setUpSingleGame();
             runGameLoop();
         }
 
-        public UserInterfaceConsole()
-        {
-            setUpSingleGame();
-        }
+       
 
         private void runGameLoop()
         {
@@ -80,5 +79,27 @@ namespace Ex02
             m_gameLogic.setSecretSequance(sequance);
         }
         
+        private void askPlayerForNumOfGuesses()
+        {
+            Console.WriteLine("Please enter amount of guesses: ");
+            string userInputStr = Console.ReadLine();
+            if(int.TryParse(userInputStr,out int userInputInt) == false)
+            {
+                Console.WriteLine("Invalid input...");
+                Console.WriteLine("Please enter amount of guesses: ");
+                userInputStr = Console.ReadLine();
+            }
+            m_gameLogic.MaxGuesses = userInputInt;
+
+        }
+
+        private void askUserInput()
+        {
+            char[] userGess = new char[4];
+            Console.WriteLine("Please type your next guess<A B C D> or 'Q' to quit:");
+            string userInputStr = Console.ReadLine();
+            
+        }
+
     }
 }

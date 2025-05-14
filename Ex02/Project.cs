@@ -11,7 +11,8 @@ namespace Ex02
 
         public static void Main()
         {
-            BullseyeGameManager Game = new BullseyeGameManager();
+            UserInterfaceConsole game = new UserInterfaceConsole();
+            game.Run();
 
         }
 
