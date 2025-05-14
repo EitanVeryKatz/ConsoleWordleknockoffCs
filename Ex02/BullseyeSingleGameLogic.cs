@@ -15,10 +15,15 @@ namespace Ex02
 
         private class Guess
         {
-            internal Type[] m_guess = new Type[4];
+            internal Type[] m_guess;
             internal int Hits { get; set; }
 
             internal int Misses { get; set; }
+
+            public Guess(Type[] i_guess)
+            {
+                m_guess = i_guess;
+            }
         }
 
         private List<Guess> m_guessList = new List<Guess>();
@@ -35,30 +40,30 @@ namespace Ex02
         }
 
 
-        //internal void GenerateSecretSequance()
-        //{
-        //    StringBuilder temporalSequance = new StringBuilder();
-        //    do
-        //    {
-        //        temporalSequance.Clear();
-
-        //        for (int i = 0; i < 4; i++)
-        //        {
-        //            Random rd = new Random();
-        //            char randomChar = (char)((rd.Next() % 8) + 'A');
-        //            temporalSequance.Append(randomChar);
-        //        }
-        //    } while (InputValidator.IsValidSequence(temporalSequance.ToString()));
-
-        //    secretSequance = temporalSequance.ToString();
-
-        //    for (int i = 0; i < 4; i++)
-        //    {
-        //        SequanceMap[temporalSequance[i]] = i;
-        //    }
-        //}
-
-
+       public void CheckGuess(Type[] i_guess)
+        {
+            int hits = 0;
+            int misses = 0;
+            CurrentGueseCount++;
+            Guess guess = new Guess(i_guess);
+            for (int inputIndex = 0; inputIndex<i_guess.Length; inputIndex++)
+            {
+                for(int SequenceIndex = 0; SequenceIndex < i_guess.Length; SequenceIndex++)
+                {
+                    if (i_guess[inputIndex].Equals(m_secretSequance[SequenceIndex]) == true)
+                    {
+                        if (inputIndex == SequenceIndex)
+                        {
+                            hits++;
+                        }
+                        else
+                        {
+                            misses++;
+                        }
+                    }
+                }
+            }
+        }
 
         //internal void CheckGuess(string i_Guess,out int io_Hits, out int io_Misses)
         //{

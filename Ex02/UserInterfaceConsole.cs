@@ -23,7 +23,7 @@ namespace Ex02
             generateSequance();
             askPlayerForNumOfGuesses();
             //also updated the gamelogic
-            printScreen();
+            printBoard();
         }
 
         public void Run()
@@ -44,9 +44,9 @@ namespace Ex02
                 {
                     break;
                 }
-                m_gameLogic.CheckGuess(userInput, out m_winFlag, out m_lossFlag);
+                m_gameLogic.CheckGuess(m_validator.ToSequense(userInput));
                 //need to update check guess
-                PrintBoard();
+                printBoard();
                 //uses data from game logic that will sore info
                 //of past guesses and hits and misses and shit
                 //to print current state of game
@@ -66,6 +66,25 @@ namespace Ex02
             finishGame();
         }
 
+        private bool askToPlayAgain()
+        {
+            bool playAgain = false;
+            Console.WriteLine("Would you like to start a new game? <Y/N>");
+            string userInput = Console.ReadLine();
+            while (m_validator.IsValidYesOrNoInput(userInput))
+            {
+                Console.WriteLine("InvalidInput...");
+                Console.WriteLine("Would you like to start a new game? <Y/N>");
+                userInput = Console.ReadLine();
+            }
+            if(userInput == "Y")
+            {
+                playAgain = true;
+            }
+            return playAgain;
+          
+        }
+
         private void generateSequance()
         {
             char[] sequance = new char[4];
@@ -75,7 +94,7 @@ namespace Ex02
                 {
                     sequance[i] = (char)m_sequenceItemRandomizer.Next('A', 'I');
                 }
-            } while (m_validator.IsValidSequence(sequance) == false);
+            } while (m_validator.sequenceHasNoDuplicates(sequance) == false);
             m_gameLogic.setSecretSequance(sequance);
         }
         
@@ -93,13 +112,21 @@ namespace Ex02
 
         }
 
-        private void askUserInput()
+        private string askUserInput()
         {
             char[] userGess = new char[4];
             Console.WriteLine("Please type your next guess<A B C D> or 'Q' to quit:");
             string userInputStr = Console.ReadLine();
-            
+            while(m_validator.IsValidUserInput(userInputStr) == false)
+            {
+                Console.WriteLine("Invalid input...");
+                Console.WriteLine("Please type your next guess<A B C D> or 'Q' to quit:");
+                userInputStr = Console.ReadLine();
+            }
+            return userInputStr;
         }
+
+        
 
     }
 }
