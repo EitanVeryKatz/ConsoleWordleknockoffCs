@@ -25,7 +25,7 @@ namespace Ex02
             generateSequance();
             askPlayerForNumOfGuesses();
             //also updated the gamelogic
-            PrintBoard();
+            printBoard();
         }
 
         public void Run()
@@ -68,25 +68,21 @@ namespace Ex02
             finishGame();
         }
 
-        private bool askToPlayAgain()
+        private bool checkIfGameOver()
         {
-            bool playAgain = false;
-            Console.WriteLine("Would you like to start a new game? <Y/N>");
-            string userInput = Console.ReadLine();
-            while (m_validator.IsValidYesOrNoInput(userInput))
+            bool gameEnded = false;
+            if(m_gameLogic.checkWin() == true)
             {
-                Console.WriteLine("InvalidInput...");
-                Console.WriteLine("Would you like to start a new game? <Y/N>");
-                userInput = Console.ReadLine();
-            }
-            if(userInput == "Y")
+                gameEnded = true;
+                Console.WriteLine("win");
+            }else if(m_gameLogic.checkLoss())
             {
-                playAgain = true;
+                gameEnded=true;
+                Console.WriteLine("loss");
             }
-            return playAgain;
-          
+            return gameEnded;
         }
-
+        
         private void generateSequance()
         {
             char[] sequance = new char[4];
@@ -127,6 +123,12 @@ namespace Ex02
             bool playAgain = false;
             Console.WriteLine("Would you like to start a new game? (Y/N)");
             string userInputStr = Console.ReadLine();
+            while (m_validator.IsValidYesOrNoInput(userInputStr)==false)
+            {
+
+                Console.WriteLine("Would you like to start a new game? (Y/N)");
+                userInputStr = Console.ReadLine();
+            }
             if (userInputStr == "Y" || userInputStr == "y")
             {
                 playAgain = true;
@@ -134,7 +136,7 @@ namespace Ex02
             return playAgain;
         }
 
-        private void PrintBoard()
+        private void printBoard()
         {
             Screen.Clear();//dll for console utils made by Guy Ronen
             Console.WriteLine("|Pins:    |Result:|");

@@ -26,6 +26,16 @@ namespace Ex02
             }
         }
 
+        public bool checkWin()
+        {
+            bool isWin = false;
+            if (m_guessList.Last().Hits == 4)
+            {
+                isWin = true;
+            }
+            return isWin;
+        }
+
         public List<Guess> m_guessList = new List<Guess>(); //public for testing
 
         public void setSecretSequance(Type[] i_sequanceItems)
@@ -44,7 +54,7 @@ namespace Ex02
         {
             int hits = 0;
             int misses = 0;
-            CurrentGueseCount++;
+            CurrentGuessCount++;
             Guess guess = new Guess(i_guess);
             for (int inputIndex = 0; inputIndex<i_guess.Length; inputIndex++)
             {
@@ -64,6 +74,16 @@ namespace Ex02
                 }
             }
             m_guessList.Add(guess);
+        }
+
+        public bool checkLoss()
+        {
+            bool lost = false;
+            if (MaxGuesses < CurrentGuessCount)
+            {
+                lost= true;
+            }
+            return lost;
         }
 
         //internal void CheckGuess(string i_Guess,out int io_Hits, out int io_Misses)
