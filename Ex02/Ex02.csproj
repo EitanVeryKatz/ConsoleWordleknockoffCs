@@ -37,7 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BullseyeSingleGameLogic.cs" />
-    <Compile Include="BullseyeGameManager.cs" />
     <Compile Include="InputValidator.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="UserInterfaceConsole.cs" />

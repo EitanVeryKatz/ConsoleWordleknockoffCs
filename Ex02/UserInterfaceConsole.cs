@@ -12,17 +12,17 @@ namespace Ex02
         private const string c_stopPlaying = "Q";
 
         private InputValidator m_validator = new InputValidator();
-        private BullseyeSingleGameLogic<char> m_gameLogic = new BullseyeSingleGameLogic<char>();
+        private BullseyeSingleGameLogic m_gameLogic = new BullseyeSingleGameLogic();
         private bool m_winFlag = false;
         private bool m_lossFlag = false;
-        private Random m_sequenceItemRandomizer = new Random();
+        
 
         private void setUpSingleGame()
         {
             m_gameLogic.SetUpNewGame();
             //will use private methods of gamelogic to
             //do all setup job for the new game
-            generateSequance();
+            m_gameLogic.generateSequance();
             askPlayerForNumOfGuesses();
             //also updated the gamelogic
             printBoard();
@@ -83,18 +83,7 @@ namespace Ex02
             return gameEnded;
         }
         
-        private void generateSequance()
-        {
-            char[] sequance = new char[4];
-            do
-            {
-                for (int i = 0; i < sequance.Length; i++)
-                {
-                    sequance[i] = (char)m_sequenceItemRandomizer.Next('A', 'I');
-                }
-            } while (m_validator.sequenceHasNoDuplicates(sequance) == false);
-            m_gameLogic.setSecretSequance(sequance);
-        }
+        
 
         private void askPlayerForNumOfGuesses()
         {

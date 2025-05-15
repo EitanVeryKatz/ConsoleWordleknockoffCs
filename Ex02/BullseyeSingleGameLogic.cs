@@ -7,20 +7,21 @@ using System.Threading.Tasks;
 
 namespace Ex02
 {
-    internal class BullseyeSingleGameLogic<Type>
+    internal class BullseyeSingleGameLogic
     {
-        private Type[] m_secretSequance = new Type[4];
+        private Random m_sequenceItemRandomizer = new Random();
+        private char[] m_secretSequance = new char[4];
         public int MaxGuesses { get; set; }
         public int CurrentGuessCount { get; private set; }
 
         public class Guess //public for testing
         {
-            internal Type[] m_guess;
+            internal char[] m_guess;
             internal int Hits { get; set; }
 
             internal int Misses { get; set; }
 
-            public Guess(Type[] i_guess)
+            public Guess(char[] i_guess)
             {
                 m_guess = i_guess;
             }
@@ -38,7 +39,7 @@ namespace Ex02
 
         public List<Guess> m_guessList = new List<Guess>(); //public for testing
 
-        public void setSecretSequance(Type[] i_sequanceItems)
+        public void setSecretSequance(char[] i_sequanceItems)
         {
             m_secretSequance = i_sequanceItems;
         }
@@ -50,7 +51,7 @@ namespace Ex02
         }
 
 
-       public void CheckGuess(Type[] i_guess)
+       public void CheckGuess(char[] i_guess)
         {
             int hits = 0;
             int misses = 0;
@@ -88,7 +89,40 @@ namespace Ex02
             return lost;
         }
 
-       
+        public void generateSequance()
+        {
+            char[] sequance = new char[4];
+            do
+            {
+                for (int i = 0; i < sequance.Length; i++)
+                {
+                    sequance[i] = (char)m_sequenceItemRandomizer.Next('A', 'I');
+                }
+            } while (sequenceHasNoDuplicates(sequance) == false);
+            m_secretSequance = sequance;
+        }
 
+        private bool sequenceHasNoDuplicates(char[] i_input)
+            //merge with input validator
+        {
+            bool hasNoDuplicates = true;
+            bool[] ArrayOfLetters = new bool[8];
+            for (int i = 0; i < 4; i++)
+            {
+                char currentLetterToCheck = char.ToUpper(char.ToUpper(i_input[i]));
+                int indexOfLetter = currentLetterToCheck - 'A';
+                if (ArrayOfLetters[indexOfLetter] == true)
+                {
+                    hasNoDuplicates = false;
+                    break;
+                }
+                else
+                {
+                    ArrayOfLetters[indexOfLetter] = true;
+                }
+
+            }
+            return hasNoDuplicates;
+        }
     }
 }
