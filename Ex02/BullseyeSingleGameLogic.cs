@@ -11,9 +11,9 @@ namespace Ex02
     {
         private Type[] m_secretSequance = new Type[4];
         public int MaxGuesses { get; set; }
-        public int CurrentGueseCount { get; private set; }
+        public int CurrentGuessCount { get; private set; }
 
-        private class Guess
+        public class Guess //public for testing
         {
             internal Type[] m_guess;
             internal int Hits { get; set; }
@@ -26,7 +26,7 @@ namespace Ex02
             }
         }
 
-        private List<Guess> m_guessList = new List<Guess>();
+        public List<Guess> m_guessList = new List<Guess>(); //public for testing
 
         public void setSecretSequance(Type[] i_sequanceItems)
         {
@@ -35,7 +35,7 @@ namespace Ex02
 
         public void SetUpNewGame()
         {
-            CurrentGueseCount = 0;
+            CurrentGuessCount = 0;
             m_guessList.Clear();
         }
 
@@ -63,6 +63,7 @@ namespace Ex02
                     }
                 }
             }
+            m_guessList.Add(guess);
         }
 
         //internal void CheckGuess(string i_Guess,out int io_Hits, out int io_Misses)

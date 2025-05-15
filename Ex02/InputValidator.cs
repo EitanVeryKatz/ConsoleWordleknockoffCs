@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex02
 {
-    internal class InputValidator
+    internal class InputValidator//supports only char[]
     {
         
         private bool isValidLength(string i_input)

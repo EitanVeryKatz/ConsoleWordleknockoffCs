@@ -8,10 +8,18 @@ namespace Ex02
 {
     internal class BullseyeGameManager
     {
-        private BullseyeSingleGameLogic m_singleGame;
+        private BullseyeSingleGameLogic<Type> m_singleGame;
 
-        internal void startGame();
+        internal void startGame()//TODO
+        {
+            //m_singleGame = new BullseyeSingleGameLogic();
+            //m_singleGame.SetUpNewGame();
+            ////will use private methods of gamelogic to
+            ////do all setup job for the new game
+            //generateSequance();
+            //askPlayerForNumOfGuesses();
 
-        internal bool askToPlayAgain();
+        }
+
     }
 }
