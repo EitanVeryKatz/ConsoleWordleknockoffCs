@@ -49,10 +49,11 @@ namespace Ex02
                 m_gameLogic.CheckGuess(m_validator.ToSequense(userInput));
                 //need to update check guess
                 printBoard();
+                
                 //uses data from game logic that will sore info
                 //of past guesses and hits and misses and shit
                 //to print current state of game
-                if (m_winFlag == true || m_lossFlag == true)
+                if (checkIfGameOver())
                 //if game ended
                 {
                     if (askToPlayAgain() == true)
@@ -65,7 +66,6 @@ namespace Ex02
                     }
                 }
             }
-            finishGame();
         }
 
         private bool checkIfGameOver()
@@ -174,20 +174,6 @@ namespace Ex02
             }
         }
 
-        private void finishGame()//TO DO
-        {
-            //if (m_winFlag == true)
-            //{
-            //    Console.WriteLine("You win!");
-            //}
-            //else if (m_lossFlag == true)
-            //{
-            //    Console.WriteLine("You lose!");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Game ended.");
-            //}
-        }
+       
     }
 }

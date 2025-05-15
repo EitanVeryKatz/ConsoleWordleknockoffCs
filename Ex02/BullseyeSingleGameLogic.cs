@@ -73,6 +73,8 @@ namespace Ex02
                     }
                 }
             }
+            guess.Misses = misses;
+            guess.Hits = hits;
             m_guessList.Add(guess);
         }
 
