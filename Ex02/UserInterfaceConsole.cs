@@ -100,7 +100,8 @@ namespace Ex02
         {
             Console.WriteLine("Please enter amount of guesses: ");
             string userInputStr = Console.ReadLine();
-            if (int.TryParse(userInputStr, out int userInputInt) == false)
+            int userInputInt;
+            while (int.TryParse(userInputStr, out userInputInt) == false|| userInputInt>10 || userInputInt<4)
             {
                 Console.WriteLine("Invalid input...");
                 Console.WriteLine("Please enter amount of guesses: ");
@@ -112,9 +113,15 @@ namespace Ex02
 
         private string askUserInput()
         {
-            char[] userGess = new char[4];
+            
             Console.WriteLine("Please type your next guess<A B C D> or 'Q' to quit:");
             string userInputStr = Console.ReadLine();
+            while (m_validator.IsValidUserInput(userInputStr) == false)
+            {
+                printBoard();
+                Console.WriteLine("Please type your next guess<A B C D> or 'Q' to quit:");
+                userInputStr = Console.ReadLine();
+            }
             return userInputStr;
         }
 

@@ -23,7 +23,7 @@ namespace Ex02
             for(int i = 0; i < i_input.Length; i++)
             {
                 char currentLetter = char.ToUpper(i_input[i]);
-                if (i % 2 == 0)
+                if (i % 2 == 1)
                 {
                     if (currentLetter != ' ')
                     {
@@ -47,9 +47,9 @@ namespace Ex02
         {
             char[] sequence = new char[4];
             int sequenceIndex = 0;
-            for (int i = 0; i < i_input.Length && i < 7; i++)
+            for (int i = 0; i < i_input.Length && i <= 7; i++)
             {
-                if (i % 2 != 0)
+                if (i % 2 == 0)
                 {
                     sequence[sequenceIndex] = i_input[i];
                     sequenceIndex++;
@@ -67,7 +67,7 @@ namespace Ex02
 
 
         internal bool sequenceHasNoDuplicates(char[] i_input) { 
-            bool hasDuplicates = false;
+            bool hasNoDuplicates = true;
             bool[] ArrayOfLetters=new bool[8];
             for(int i = 0;i < 4;i++)
             {
@@ -75,7 +75,7 @@ namespace Ex02
                 int indexOfLetter = currentLetterToCheck - 'A';
                 if (ArrayOfLetters[indexOfLetter] == true)
                 {
-                    hasDuplicates = true;
+                    hasNoDuplicates = false;
                     break;
                 }
                 else
@@ -84,7 +84,7 @@ namespace Ex02
                 }
 
             }
-            return hasDuplicates;
+            return hasNoDuplicates;
         }
 
 

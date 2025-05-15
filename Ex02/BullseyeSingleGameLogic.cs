@@ -86,30 +86,7 @@ namespace Ex02
             return lost;
         }
 
-        //internal void CheckGuess(string i_Guess,out int io_Hits, out int io_Misses)
-        //{
-        //    io_Hits = 0;
-        //    io_Misses = 0;
-        //    for (int i = 0; i < 4; i++)
-        //    {
-
-        //        bool isInSequance = SequanceMap.TryGetValue(i_Guess[i], out int Index);
-        //        if (isInSequance == true)
-        //        {
-        //            if(Index == i)
-        //            {
-        //                io_Hits++;
-        //            }
-        //            else
-        //            {
-        //                io_Misses++;
-        //            }
-        //        }
-        //    }
-        //}
-
-
-
+       
 
     }
 }
