@@ -134,35 +134,48 @@ namespace Ex02
 
         private void printBoard()
         {
-            Screen.Clear();//dll for console utils made by Guy Ronen
-            Console.WriteLine("|Pins:    |Result:|");
-            Console.WriteLine("|=========|=======|");
-            Console.WriteLine("| # # # # |       |");
-            Console.WriteLine("|=========|=======|");
-            for (int i = 0; i < m_gameLogic.CurrentGuessCount; i++)
+            Screen.Clear(); // dll for console utils made by Guy Ronen
+            Console.WriteLine("|Pins:    |Result:  |");
+            Console.WriteLine("|=========|=========|");
+            Console.WriteLine("| # # # # |         |");
+            Console.WriteLine("|=========|=========|");
+
+            for (int i = 0; i < m_gameLogic.MaxGuesses; i++)
             {
-                var guess = m_gameLogic.m_guessList[i];
-                // Print guessed pins
-                Console.Write("| {0} {1} {2} {3} |",
-                    guess.m_guess[0],
-                    guess.m_guess[1],
-                    guess.m_guess[2],
-                    guess.m_guess[3]);
-                // Print result (Hits and Misses)
-                Console.Write("|");
-                for (int j = 0; j < guess.Hits; j++)
+                if (i < m_gameLogic.m_guessList.Count && m_gameLogic.m_guessList[i] != null)
                 {
-                    Console.Write(" V");
+                    var guess = m_gameLogic.m_guessList[i];
+                    // Print guessed pins
+                    Console.Write("| {0} {1} {2} {3} |",
+                        guess.m_guess[0],
+                        guess.m_guess[1],
+                        guess.m_guess[2],
+                        guess.m_guess[3]);
+
+                    // Prepare result string (V for hit, X for miss)
+                    StringBuilder result = new StringBuilder();
+                    for (int j = 0; j < guess.Hits; j++)
+                    {
+                        result.Append("V ");
+                    }
+                    for (int j = 0; j < guess.Misses; j++)
+                    {
+                        result.Append("X ");
+                    }
+                    // Pad or trim result to fit nicely
+                    string resultStr = result.ToString().TrimEnd().PadRight(5);
+
+                    Console.WriteLine(" {0}   |", resultStr);
                 }
-                for (int j = 0; j < guess.Misses; j++)
+                else
                 {
-                    Console.Write(" X");
+                    Console.WriteLine("|         |         |");
                 }
-                Console.WriteLine(" |");
-                Console.WriteLine("|=========|=======|");
+                Console.WriteLine("|=========|=========|");
             }
         }
 
-       
+
+
     }
 }
