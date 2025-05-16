@@ -159,14 +159,15 @@ namespace Ex02
 
                     // Prepare result string (V for hit, X for miss)
                     StringBuilder result = new StringBuilder();
-                    for (int j = 0; j < guess.Hits; j++)
+                    for (int hitIndex = 0; hitIndex < guess.Hits; hitIndex++)
                     {
                         result.Append("V ");
                     }
-                    for (int j = 0; j < guess.Misses; j++)
+                    for (int missIndex = 0; missIndex < guess.Misses; missIndex++)
                     {
                         result.Append("X ");
                     }
+
 
                     // Pad or trim result to fit nicely
                     string resultStr = result.ToString().TrimEnd().PadRight(5);

@@ -22,10 +22,10 @@ namespace Ex02
 
         public class Guess 
         {
-            internal char[] m_guess;
-            internal int Hits { get; set; }
+            public char[] m_guess;
+            public int Hits { get; set; }
 
-            internal int Misses { get; set; }
+            public int Misses { get; set; }
 
             public Guess(char[] i_guess)
             {
@@ -87,12 +87,12 @@ namespace Ex02
 
         public bool checkLoss()
         {
-            bool lost = false;
+            bool didPlayerLose = false;
             if (MaxGuesses-1 < CurrentGuessCount)
             {
-                lost= true;
+                didPlayerLose= true;
             }
-            return lost;
+            return didPlayerLose;
         }
 
         public void generatesequence()
@@ -101,7 +101,7 @@ namespace Ex02
             do
             {
                 sequence = createRandomSequence();
-            } while (sequenceHasNoDuplicates(sequence) == false);
+            } while (m_sequenceValidator.SequenceHasNoDuplicates(sequence) == false);
             m_secretsequence = sequence;
         }
 
@@ -114,30 +114,5 @@ namespace Ex02
             }
             return sequence;
         }
-
-        private bool sequenceHasNoDuplicates(char[] i_input)
-            //merge with input validator
-        {
-            bool hasNoDuplicates = true;
-            bool[] ArrayOfLetters = new bool[8];
-            for (int i = 0; i < 4; i++)
-            {
-                char currentLetterToCheck = char.ToUpper(char.ToUpper(i_input[i]));
-                int indexOfLetter = currentLetterToCheck - 'A';
-                if (ArrayOfLetters[indexOfLetter] == true)
-                {
-                    hasNoDuplicates = false;
-                    break;
-                }
-                else
-                {
-                    ArrayOfLetters[indexOfLetter] = true;
-                }
-
-            }
-            return hasNoDuplicates;
-        }
-
-
     }
 }

@@ -74,7 +74,7 @@ namespace Ex02
         private bool stringHasNoDuplicates(string i_input)
         {
             char[] sequence = Tosequence(i_input);
-            return m_sequenceValidator.sequenceHasNoDuplicates(sequence);
+            return m_sequenceValidator.SequenceHasNoDuplicates(sequence);
         }
 
         internal char[] Tosequence(string i_input)
