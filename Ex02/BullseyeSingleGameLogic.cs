@@ -9,6 +9,7 @@ namespace Ex02
 {
     internal class BullseyeSingleGameLogic
     {
+        InputValidator m_sequenceValidator = new InputValidator();
         private Random m_sequenceItemRandomizer = new Random();
         private char[] m_secretSequance = new char[4];
         public int MaxGuesses { get; set; }
@@ -124,5 +125,7 @@ namespace Ex02
             }
             return hasNoDuplicates;
         }
+
+
     }
 }

@@ -11,7 +11,7 @@ namespace Ex02
     {
         private const string c_stopPlaying = "Q";
 
-        private InputValidator m_validator = new InputValidator();
+        private ConsoleUserInterfaceInputValidaor m_validator = new ConsoleUserInterfaceInputValidaor();
         private BullseyeSingleGameLogic m_gameLogic = new BullseyeSingleGameLogic();
         private bool m_winFlag = false;
         private bool m_lossFlag = false;
@@ -163,6 +163,8 @@ namespace Ex02
             }
         }
 
-       
+        
+
+
     }
 }
