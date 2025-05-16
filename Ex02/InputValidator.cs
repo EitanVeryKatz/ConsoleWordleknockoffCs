@@ -14,7 +14,7 @@ namespace Ex02
 
         internal bool sequenceHasNoDuplicates(char[] i_input) { 
             bool hasNoDuplicates = true;
-            bool[] ArrayOfLetters=new bool[8];
+            bool[] ArrayOfLetters=new bool[BullseyeSingleGameLogic.k_amountOfOptionsForSequanceItems];
             for(int i = 0;i < 4;i++)
             {
                 char currentLetterToCheck = char.ToUpper(char.ToUpper(i_input[i]));

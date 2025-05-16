@@ -12,10 +12,11 @@ namespace Ex02
         public const int k_amountOfItemsInSequence = 4;
         public const int k_maximumAnountOfGuesses = 10;
         public const int k_minumumAmountOfGuesses = 4;
+        public const int k_amountOfOptionsForSequanceItems = 8;
 
         InputValidator m_sequenceValidator = new InputValidator();
         private Random m_sequenceItemRandomizer = new Random();
-        private char[] m_secretSequance = new char[k_amountOfItemsInSequence];
+        private char[] m_secretsequence = new char[k_amountOfItemsInSequence];
         public int MaxGuesses { get; set; }
         public int CurrentGuessCount { get; private set; }
 
@@ -44,9 +45,9 @@ namespace Ex02
 
         public List<Guess> m_guessList = new List<Guess>(); 
 
-        public void setSecretSequance(char[] i_sequanceItems)
+        public void setSecretsequence(char[] i_sequenceItems)
         {
-            m_secretSequance = i_sequanceItems;
+            m_secretsequence = i_sequenceItems;
         }
 
         public void SetUpNewGame()
@@ -66,7 +67,7 @@ namespace Ex02
             {
                 for(int SequenceIndex = 0; SequenceIndex < i_guess.Length; SequenceIndex++)
                 {
-                    if (i_guess[inputIndex].Equals(m_secretSequance[SequenceIndex]) == true)
+                    if (i_guess[inputIndex].Equals(m_secretsequence[SequenceIndex]) == true)
                     {
                         if (inputIndex == SequenceIndex)
                         {
@@ -94,17 +95,24 @@ namespace Ex02
             return lost;
         }
 
-        public void generateSequance()
+        public void generatesequence()
         {
-            char[] sequance = new char[k_amountOfItemsInSequence];
+            char[] sequence;
             do
             {
-                for (int i = 0; i < sequance.Length; i++)
-                {
-                    sequance[i] = (char)m_sequenceItemRandomizer.Next('A', 'I');
-                }
-            } while (sequenceHasNoDuplicates(sequance) == false);
-            m_secretSequance = sequance;
+                sequence = createRandomSequence();
+            } while (sequenceHasNoDuplicates(sequence) == false);
+            m_secretsequence = sequence;
+        }
+
+        private char[] createRandomSequence()
+        {
+            char[] sequence = new char[k_amountOfItemsInSequence];
+            for (int i = 0; i < sequence.Length; i++)
+            {
+                sequence[i] = (char)m_sequenceItemRandomizer.Next('A', 'I');
+            }
+            return sequence;
         }
 
         private bool sequenceHasNoDuplicates(char[] i_input)

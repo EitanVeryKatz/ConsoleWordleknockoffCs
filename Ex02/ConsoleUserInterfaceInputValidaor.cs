@@ -8,15 +8,19 @@ namespace Ex02
 {
     internal class ConsoleUserInterfaceInputValidaor
     {
+
+        private const int k_validLengthForGuessInput = 7;
         InputValidator m_sequenceValidator = new InputValidator();
         public bool IsGuessAmountValid(string i_userInputStr, out string o_errorMessage, out int o_userInputInt)
         {
             o_errorMessage = string.Empty;
             bool isValid = true;
             bool isInteger = int.TryParse(i_userInputStr, out o_userInputInt);
+            int minimumAmountOfGuesses = BullseyeSingleGameLogic.k_minumumAmountOfGuesses;
+            int maximumAmountOfGuesses = BullseyeSingleGameLogic.k_maximumAnountOfGuesses;
             if (isInteger)
             {
-                if (o_userInputInt < 4 || o_userInputInt > 10)
+                if (o_userInputInt < minimumAmountOfGuesses|| o_userInputInt > maximumAmountOfGuesses )
                 {
                     o_errorMessage = "Input must be between 4 and 10.";
                     isValid = false;
@@ -33,7 +37,7 @@ namespace Ex02
         private bool isValidLength(string i_input)
         {
             bool validLength = false;
-            if (i_input.Length == 7)
+            if (i_input.Length == k_validLengthForGuessInput)
             {
                 validLength = true;
             }
@@ -69,15 +73,15 @@ namespace Ex02
 
         private bool stringHasNoDuplicates(string i_input)
         {
-            char[] sequence = ToSequense(i_input);
+            char[] sequence = Tosequence(i_input);
             return m_sequenceValidator.sequenceHasNoDuplicates(sequence);
         }
 
-        internal char[] ToSequense(string i_input)
+        internal char[] Tosequence(string i_input)
         {
             char[] sequence = new char[4];
             int sequenceIndex = 0;
-            for (int i = 0; i < i_input.Length && i <= 7; i++)
+            for (int i = 0; i < i_input.Length && i <= k_validLengthForGuessInput; i++)
             {
                 if (i % 2 == 0)
                 {

@@ -9,7 +9,10 @@ namespace Ex02
 {
     internal class UserInterfaceConsole
     {
-        private const string c_stopPlaying = "Q";
+        private const string k_stopPlaying = "Q";
+        private const string k_askUserForGuessMessage = "Please type your next guess<A B C D> or 'Q' to quit:";
+        private const string k_askUserForAmountOfGuessesMessage = "Please enter amount of guesses: ";
+        private const string k_askUserToPlayAgainMessage = "Would you like to start a new game? (Y/N)";
 
         private ConsoleUserInterfaceInputValidaor m_validator = new ConsoleUserInterfaceInputValidaor();
         private BullseyeSingleGameLogic m_gameLogic = new BullseyeSingleGameLogic();
@@ -20,7 +23,7 @@ namespace Ex02
             m_gameLogic.SetUpNewGame();
             //will use private methods of gamelogic to
             //do all setup job for the new game
-            m_gameLogic.generateSequance();
+            m_gameLogic.generatesequence();
             askPlayerForNumOfGuesses();
             //also updated the gamelogic
             printBoard();
@@ -40,11 +43,11 @@ namespace Ex02
             {
                 string userInput = askUserInput();
                 //ask user input uses inputVallidator internally
-                if (userInput == c_stopPlaying)
+                if (userInput == k_stopPlaying)
                 {
                     break;
                 }
-                m_gameLogic.CheckGuess(m_validator.ToSequense(userInput));
+                m_gameLogic.CheckGuess(m_validator.Tosequence(userInput));
                 //need to update check guess
                 printBoard();
                 
@@ -83,7 +86,7 @@ namespace Ex02
 
         private void askPlayerForNumOfGuesses()
         {
-            Console.WriteLine("Please enter amount of guesses: ");
+            Console.WriteLine(k_askUserForAmountOfGuessesMessage);
             string userInputStr = Console.ReadLine();
             //input validator will check if input is valid
             int userInputInt;
@@ -91,8 +94,8 @@ namespace Ex02
 
             while (m_validator.IsGuessAmountValid(userInputStr, out string errorMessage, out userInputInt)==false)//amount of guesses not valid
             {
-                   Console.WriteLine(errorMessage);
-                Console.WriteLine("Please enter amount of guesses: ");
+                Console.WriteLine(errorMessage);
+                Console.WriteLine(k_askUserForAmountOfGuessesMessage);
                 userInputStr = Console.ReadLine();
             }
 
@@ -103,14 +106,14 @@ namespace Ex02
         private string askUserInput()
         {
             
-            Console.WriteLine("Please type your next guess<A B C D> or 'Q' to quit:");
+            Console.WriteLine(k_askUserForGuessMessage);
             string userInputStr = Console.ReadLine();
             string errorMessage;
             while (m_validator.IsValidUserInput(userInputStr,out errorMessage) == false)
             {
                 printBoard();
                 Console.WriteLine(errorMessage);
-                Console.WriteLine("Please type your next guess<A B C D> or 'Q' to quit:");
+                Console.WriteLine(k_askUserForGuessMessage);
                 userInputStr = Console.ReadLine();
             }
             return userInputStr;
@@ -119,12 +122,12 @@ namespace Ex02
         private bool askToPlayAgain()
         {
             bool playAgain = false;
-            Console.WriteLine("Would you like to start a new game? (Y/N)");
+            Console.WriteLine(k_askUserToPlayAgainMessage);
             string userInputStr = Console.ReadLine();
             while (m_validator.IsValidYesOrNoInput(userInputStr)==false)
             {
 
-                Console.WriteLine("Would you like to start a new game? (Y/N)");
+                Console.WriteLine(k_askUserToPlayAgainMessage);
                 userInputStr = Console.ReadLine();
             }
             if (userInputStr == "Y" || userInputStr == "y")
@@ -146,7 +149,7 @@ namespace Ex02
             {
                 if (i < m_gameLogic.m_guessList.Count && m_gameLogic.m_guessList[i] != null)
                 {
-                    var guess = m_gameLogic.m_guessList[i];
+                    BullseyeSingleGameLogic.Guess guess = m_gameLogic.m_guessList[i];
                     // Print guessed pins
                     Console.Write("| {0} {1} {2} {3} |",
                         guess.m_guess[0],
