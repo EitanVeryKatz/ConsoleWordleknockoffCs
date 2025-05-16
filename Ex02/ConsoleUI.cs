@@ -7,35 +7,35 @@ using Ex02.ConsoleUtils;
 
 namespace Ex02
 {
-    internal class UserInterfaceConsole
+    internal class ConsoleUI
     {
         private const string k_stopPlaying = "Q";
         private const string k_askUserForGuessMessage = "Please type your next guess<A B C D> or 'Q' to quit:";
         private const string k_askUserForAmountOfGuessesMessage = "Please enter amount of guesses: ";
         private const string k_askUserToPlayAgainMessage = "Would you like to start a new game? (Y/N)";
 
-        private ConsoleUserInterfaceInputValidaor m_validator = new ConsoleUserInterfaceInputValidaor();
-        private BullseyeSingleGameLogic m_gameLogic = new BullseyeSingleGameLogic();
+        private ConsoleInputValidaor m_validator = new ConsoleInputValidaor();
+        private GameLogic m_gameLogic = new GameLogic();
         
-        private void setUpSingleGame()//DONE
+        private void setUpSingleGame()
         {
             m_gameLogic.SetUpNewGame();
-            m_gameLogic.generatesequence();
-            askPlayerForNumOfGuesses();
+            m_gameLogic.GenerateSequence();
+            requestNumOfGuesses();
             printBoard();
         }
 
-        public void Run()//DONE
+        public void Run()
         {
             setUpSingleGame();
             runGameLoop();
         }
 
-        private void runGameLoop()//DONE
+        private void runGameLoop()
         {
             while (true)
             {
-                string userInput = askUserInput();
+                string userInput = requestUserInput();
 
                 if (userInput == k_stopPlaying)
                 {
@@ -62,16 +62,16 @@ namespace Ex02
 
         }
 
-        private bool checkIfGameOver()//DONE
+        private bool checkIfGameOver()
         {
             bool gameEnded = false;
 
-            if (m_gameLogic.checkWin() == true)
+            if (m_gameLogic.CheckWin() == true)
             {
                 gameEnded = true;
                 Console.WriteLine("You guessed after {0} steps!",m_gameLogic.CurrentGuessCount);
             }
-            else if (m_gameLogic.checkLoss())
+            else if (m_gameLogic.CheckLoss())
             {
                 gameEnded = true;
                 Console.WriteLine("No more guesses allowed. You lost.");
@@ -80,7 +80,7 @@ namespace Ex02
             return gameEnded;
         }
 
-        private void askPlayerForNumOfGuesses()//DONE
+        private void requestNumOfGuesses()
         {
             int userInputInt;
 
@@ -97,7 +97,7 @@ namespace Ex02
             m_gameLogic.MaxGuesses = userInputInt;
         }
 
-        private string askUserInput()//DONE
+        private string requestUserInput()
         {
             string errorMessage;
 
@@ -115,7 +115,7 @@ namespace Ex02
             return userInputStr;
         }
 
-        private bool askToPlayAgain()//DONE
+        private bool askToPlayAgain()
         {
             bool playAgain = false;
 
@@ -133,9 +133,9 @@ namespace Ex02
             return playAgain;
         }
 
-        private void printBoard()//DONE
+        private void printBoard()
         {
-            Screen.Clear(); // dll for console utils made by Guy Ronen
+            Screen.Clear();
             Console.WriteLine("|Pins:    |Result:  |");
             Console.WriteLine("|=========|=========|");
             Console.WriteLine("| # # # # |         |");
@@ -145,7 +145,7 @@ namespace Ex02
             {
                 if (i < m_gameLogic.m_guessList.Count && m_gameLogic.m_guessList[i] != null)
                 {
-                    BullseyeSingleGameLogic.Guess guess = m_gameLogic.m_guessList[i];
+                    GameLogic.Guess guess = m_gameLogic.m_guessList[i];
                     StringBuilder result = new StringBuilder();
 
                     Console.Write("| {0} {1} {2} {3} |",

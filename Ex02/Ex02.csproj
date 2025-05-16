@@ -36,11 +36,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BullseyeSingleGameLogic.cs" />
-    <Compile Include="ConsoleUserInterfaceInputValidaor.cs" />
-    <Compile Include="InputValidator.cs" />
+    <Compile Include="GameLogic.cs" />
+    <Compile Include="ConsoleInputValidaor.cs" />
+    <Compile Include="SequenceValidator.cs" />
     <Compile Include="Project.cs" />
-    <Compile Include="UserInterfaceConsole.cs" />
+    <Compile Include="ConsoleUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Ex02.ConsoleUtils">

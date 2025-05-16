@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace Ex02
 {
-    public class InputValidator
+    public class SequenceValidator
     {
-        public bool SequenceHasNoDuplicates(char[] i_input)//DONE
+        public bool SequenceHasNoDuplicates(char[] i_input)
         { 
             bool hasNoDuplicates = true;
-            Dictionary<char,bool> ExistingCharsInSequence = new Dictionary<char,bool>();
+            Dictionary<char,bool> existingCharsInSequence = new Dictionary<char,bool>();
 
-            for (int i = 0; i < BullseyeSingleGameLogic.k_amountOfItemsInSequence; i++)
+            for (int i = 0; i < GameLogic.k_amountOfItemsInSequence; i++)
             {
                 char currentLetterToCheck = char.ToUpper(i_input[i]);
 
-                if (ExistingCharsInSequence.ContainsKey(currentLetterToCheck))
+                if (existingCharsInSequence.ContainsKey(currentLetterToCheck))
                 {
                     hasNoDuplicates = false;
                     break;
                 }
                 else
                 {
-                    ExistingCharsInSequence[currentLetterToCheck] = true;
+                    existingCharsInSequence[currentLetterToCheck] = true;
                 }
 
             }

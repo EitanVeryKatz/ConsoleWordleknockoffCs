@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ex02
 {
-    public class Project//DONE
+    public class Project
     {
 
         public static void Main()
         {
-            UserInterfaceConsole game = new UserInterfaceConsole();
+            ConsoleUI game = new ConsoleUI();
 
             game.Run();
         }

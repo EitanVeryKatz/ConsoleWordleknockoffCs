@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ex02
 {
-    internal class BullseyeSingleGameLogic
+    internal class GameLogic
     {
         public const int k_amountOfItemsInSequence = 4;
         public const int k_maximumAnountOfGuesses = 10;
@@ -15,7 +15,7 @@ namespace Ex02
         public const int k_amountOfOptionsForSequanceItems = 8;
 
         public List<Guess> m_guessList = new List<Guess>();
-        InputValidator m_sequenceValidator = new InputValidator();
+        SequenceValidator m_sequenceValidator = new SequenceValidator();
         private Random m_sequenceItemRandomizer = new Random();
         private char[] m_secretsequence = new char[k_amountOfItemsInSequence];
         public int MaxGuesses { get; set; }
@@ -35,25 +35,25 @@ namespace Ex02
 
         }
 
-        public bool checkWin()//DONE
+        public bool CheckWin()
         {
             bool isWin = (m_guessList.Last().Hits == k_amountOfItemsInSequence);
 
             return isWin;
         }
 
-        public void setSecretsequence(char[] i_sequenceItems)//DONE
+        public void SetSecretSequence(char[] i_sequenceItems)
         {
             m_secretsequence = i_sequenceItems;
         }
 
-        public void SetUpNewGame()//DONE
+        public void SetUpNewGame()
         {
             CurrentGuessCount = 0;
             m_guessList.Clear();
         }
 
-       public void CheckGuess(char[] i_guess)//DONE
+       public void CheckGuess(char[] i_guess)
         {
             int hits = 0;
             int misses = 0;
@@ -86,14 +86,14 @@ namespace Ex02
             m_guessList.Add(guess);
        }
 
-        public bool checkLoss()//DONE
+        public bool CheckLoss()
         {
             bool didPlayerLose = MaxGuesses - 1 < CurrentGuessCount;
             
             return didPlayerLose;
         }
 
-        public void generatesequence()//DONE
+        public void GenerateSequence()
         {
             char[] sequence;
 
@@ -106,7 +106,7 @@ namespace Ex02
             m_secretsequence = sequence;
         }
 
-        private char[] createRandomSequence()//DONE
+        private char[] createRandomSequence()
         {
             char[] sequence = new char[k_amountOfItemsInSequence];
 

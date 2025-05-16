@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Ex02
 {
-    internal class ConsoleUserInterfaceInputValidaor
+    internal class ConsoleInputValidaor
     {
         private const int k_validLengthForGuessInput = 7;
-        InputValidator m_sequenceValidator = new InputValidator();
+        SequenceValidator m_sequenceValidator = new SequenceValidator();
 
-        public bool IsGuessAmountValid(string i_userInputStr, out string o_errorMessage, out int o_userInputInt)//DONE
+        internal bool IsGuessAmountValid(string i_userInputStr, out string o_errorMessage, out int o_userInputInt)
         {
             bool isValid = true;
             bool isInteger = int.TryParse(i_userInputStr, out o_userInputInt);
-            int minimumAmountOfGuesses = BullseyeSingleGameLogic.k_minumumAmountOfGuesses;
-            int maximumAmountOfGuesses = BullseyeSingleGameLogic.k_maximumAnountOfGuesses;
+            int minimumAmountOfGuesses = GameLogic.k_minumumAmountOfGuesses;
+            int maximumAmountOfGuesses = GameLogic.k_maximumAnountOfGuesses;
 
             o_errorMessage = string.Empty;
             if (isInteger)
@@ -37,14 +37,14 @@ namespace Ex02
             return isValid;
         }
 
-        private bool isValidLength(string i_input)//DONE
+        private bool isValidGuessLength(string i_input)
         {
             bool validLength = (i_input.Length == k_validLengthForGuessInput);
             
             return validLength;
         }
 
-        private bool containsOnlyValidChars(string i_input)//DONE
+        private bool guessHasOnlyValidChars(string i_input)
         {
             bool validChars = true;
 
@@ -76,16 +76,16 @@ namespace Ex02
             return validChars;
         }
 
-        private bool stringHasNoDuplicates(string i_input)//DONE
+        private bool guessHasNoDuplicates(string i_input)
         {
             char[] sequence = Tosequence(i_input);
 
             return m_sequenceValidator.SequenceHasNoDuplicates(sequence);
         }
 
-        internal char[] Tosequence(string i_input)//DONE
+        internal char[] Tosequence(string i_input)
         {
-            char[] sequence = new char[BullseyeSingleGameLogic.k_amountOfItemsInSequence];
+            char[] sequence = new char[GameLogic.k_amountOfItemsInSequence];
             int sequenceIndex = 0;
 
             for (int i = 0; i < i_input.Length && i <= k_validLengthForGuessInput; i++) 
@@ -101,14 +101,14 @@ namespace Ex02
             return sequence;
         }
 
-        public bool IsValidYesOrNoInput(string i_userInput)//DONE
+        internal bool IsValidYesOrNoInput(string i_userInput)
         {
             bool isValid = (i_userInput == "Y" || i_userInput == "N");
 
             return isValid;
         }
 
-        public bool IsValidUserInput(string i_input, out string o_errorMessage)//DONE
+        internal bool IsValidUserInput(string i_input, out string o_errorMessage)
         {
             bool isValid = true;
 
@@ -117,17 +117,17 @@ namespace Ex02
                 o_errorMessage = string.Empty;
                 isValid = true;
             }
-            else if (isValidLength(i_input) == false)
+            else if (isValidGuessLength(i_input) == false)
             {
                 o_errorMessage = "Input must be 4 letters separated by spaces (e.g., A B C D).";
                 isValid = false;
             }
-            else if (containsOnlyValidChars(i_input) == false)
+            else if (guessHasOnlyValidChars(i_input) == false)
             {
                 o_errorMessage = "Input must contain only letters A-H and spaces between them.";
                 isValid = false;
             }
-            else if (stringHasNoDuplicates(i_input) == false)
+            else if (guessHasNoDuplicates(i_input) == false)
             {
                 o_errorMessage = "Input must not contain duplicate letters.";
                 isValid = false;
