@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace Ex02
 {
-    internal class Project
+    public class Project//DONE
     {
 
         public static void Main()
         {
             UserInterfaceConsole game = new UserInterfaceConsole();
-            game.Run();
 
+            game.Run();
         }
 
     }
+
 }
 
 

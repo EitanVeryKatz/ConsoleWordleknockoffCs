@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Ex02.ConsoleUtils;//dll for console utils made by Guy Ronen
+using Ex02.ConsoleUtils;
 
 namespace Ex02
 {
@@ -17,42 +17,35 @@ namespace Ex02
         private ConsoleUserInterfaceInputValidaor m_validator = new ConsoleUserInterfaceInputValidaor();
         private BullseyeSingleGameLogic m_gameLogic = new BullseyeSingleGameLogic();
         
-
-        private void setUpSingleGame()
+        private void setUpSingleGame()//DONE
         {
             m_gameLogic.SetUpNewGame();
-            //will use private methods of gamelogic to
-            //do all setup job for the new game
             m_gameLogic.generatesequence();
             askPlayerForNumOfGuesses();
-            //also updated the gamelogic
             printBoard();
         }
 
-        public void Run()
+        public void Run()//DONE
         {
             setUpSingleGame();
             runGameLoop();
         }
 
-
-
-        private void runGameLoop()
+        private void runGameLoop()//DONE
         {
             while (true)
             {
                 string userInput = askUserInput();
-                //ask user input uses inputVallidator internally
+
                 if (userInput == k_stopPlaying)
                 {
+                    Console.WriteLine("Goodbye!");
                     break;
                 }
+
                 m_gameLogic.CheckGuess(m_validator.Tosequence(userInput));
-                //need to update check guess
                 printBoard();
-                
                 if (checkIfGameOver())
-                //if game ended
                 {
                     if (askToPlayAgain() == true)
                     {
@@ -62,13 +55,17 @@ namespace Ex02
                     {
                         break;
                     }
+
                 }
+
             }
+
         }
 
-        private bool checkIfGameOver()
+        private bool checkIfGameOver()//DONE
         {
             bool gameEnded = false;
+
             if (m_gameLogic.checkWin() == true)
             {
                 gameEnded = true;
@@ -79,20 +76,18 @@ namespace Ex02
                 gameEnded = true;
                 Console.WriteLine("No more guesses allowed. You lost.");
             }
+
             return gameEnded;
         }
 
-
-
-        private void askPlayerForNumOfGuesses()
+        private void askPlayerForNumOfGuesses()//DONE
         {
+            int userInputInt;
+
             Console.WriteLine(k_askUserForAmountOfGuessesMessage);
             string userInputStr = Console.ReadLine();
-            //input validator will check if input is valid
-            int userInputInt;
-            
 
-            while (m_validator.IsGuessAmountValid(userInputStr, out string errorMessage, out userInputInt)==false)//amount of guesses not valid
+            while (m_validator.IsGuessAmountValid(userInputStr, out string errorMessage, out userInputInt) == false) 
             {
                 Console.WriteLine(errorMessage);
                 Console.WriteLine(k_askUserForAmountOfGuessesMessage);
@@ -100,44 +95,45 @@ namespace Ex02
             }
 
             m_gameLogic.MaxGuesses = userInputInt;
-
         }
 
-        private string askUserInput()
+        private string askUserInput()//DONE
         {
-            
+            string errorMessage;
+
             Console.WriteLine(k_askUserForGuessMessage);
             string userInputStr = Console.ReadLine();
-            string errorMessage;
-            while (m_validator.IsValidUserInput(userInputStr,out errorMessage) == false)
+
+            while (m_validator.IsValidUserInput(userInputStr, out errorMessage) == false) 
             {
                 printBoard();
                 Console.WriteLine(errorMessage);
                 Console.WriteLine(k_askUserForGuessMessage);
                 userInputStr = Console.ReadLine();
             }
+
             return userInputStr;
         }
 
-        private bool askToPlayAgain()
+        private bool askToPlayAgain()//DONE
         {
             bool playAgain = false;
+
             Console.WriteLine(k_askUserToPlayAgainMessage);
             string userInputStr = Console.ReadLine();
-            while (m_validator.IsValidYesOrNoInput(userInputStr)==false)
-            {
 
+            while (m_validator.IsValidYesOrNoInput(userInputStr) == false)
+            {
                 Console.WriteLine(k_askUserToPlayAgainMessage);
                 userInputStr = Console.ReadLine();
             }
-            if (userInputStr == "Y" || userInputStr == "y")
-            {
-                playAgain = true;
-            }
+
+            playAgain = (userInputStr == "Y" || userInputStr == "y");
+
             return playAgain;
         }
 
-        private void printBoard()
+        private void printBoard()//DONE
         {
             Screen.Clear(); // dll for console utils made by Guy Ronen
             Console.WriteLine("|Pins:    |Result:  |");
@@ -150,32 +146,28 @@ namespace Ex02
                 if (i < m_gameLogic.m_guessList.Count && m_gameLogic.m_guessList[i] != null)
                 {
                     BullseyeSingleGameLogic.Guess guess = m_gameLogic.m_guessList[i];
-                    // Print guessed pins
+                    StringBuilder result = new StringBuilder();
+
                     Console.Write("| {0} {1} {2} {3} |",
                         guess.m_guess[0],
                         guess.m_guess[1],
                         guess.m_guess[2],
                         guess.m_guess[3]);
 
-                    // Prepare result string (V for hit, X for miss)
-                    StringBuilder result = new StringBuilder();
                     for (int hitIndex = 0; hitIndex < guess.Hits; hitIndex++)
                     {
                         result.Append("V ");
                     }
+
                     for (int missIndex = 0; missIndex < guess.Misses; missIndex++)
                     {
                         result.Append("X ");
                     }
 
-
-                    // Pad or trim result to fit nicely
                     string resultStr = result.ToString().TrimEnd().PadRight(5);
                     string padding = "   ";
                     if (result.Length == 8)
                     {
-                        //get rid of the last space
-                        
                         padding = " ";
                     }
 
@@ -185,11 +177,12 @@ namespace Ex02
                 {
                     Console.WriteLine("|         |         |");
                 }
+
                 Console.WriteLine("|=========|=========|");
             }
+
         }
 
-
-
     }
+
 }

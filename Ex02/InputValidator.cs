@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 
 namespace Ex02
 {
-    internal class InputValidator
+    public class InputValidator
     {
-        
-       
-
-
-        internal bool SequenceHasNoDuplicates(char[] i_input) { 
+        public bool SequenceHasNoDuplicates(char[] i_input)//DONE
+        { 
             bool hasNoDuplicates = true;
             Dictionary<char,bool> ExistingCharsInSequence = new Dictionary<char,bool>();
+
             for (int i = 0; i < BullseyeSingleGameLogic.k_amountOfItemsInSequence; i++)
             {
                 char currentLetterToCheck = char.ToUpper(i_input[i]);
+
                 if (ExistingCharsInSequence.ContainsKey(currentLetterToCheck))
                 {
                     hasNoDuplicates = false;
@@ -27,13 +26,12 @@ namespace Ex02
                 {
                     ExistingCharsInSequence[currentLetterToCheck] = true;
                 }
+
             }
+
             return hasNoDuplicates;
         }
 
-
-        
-
-       
     }
+
 }

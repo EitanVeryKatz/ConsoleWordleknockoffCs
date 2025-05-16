@@ -8,16 +8,17 @@ namespace Ex02
 {
     internal class ConsoleUserInterfaceInputValidaor
     {
-
         private const int k_validLengthForGuessInput = 7;
         InputValidator m_sequenceValidator = new InputValidator();
-        public bool IsGuessAmountValid(string i_userInputStr, out string o_errorMessage, out int o_userInputInt)
+
+        public bool IsGuessAmountValid(string i_userInputStr, out string o_errorMessage, out int o_userInputInt)//DONE
         {
-            o_errorMessage = string.Empty;
             bool isValid = true;
             bool isInteger = int.TryParse(i_userInputStr, out o_userInputInt);
             int minimumAmountOfGuesses = BullseyeSingleGameLogic.k_minumumAmountOfGuesses;
             int maximumAmountOfGuesses = BullseyeSingleGameLogic.k_maximumAnountOfGuesses;
+
+            o_errorMessage = string.Empty;
             if (isInteger)
             {
                 if (o_userInputInt < minimumAmountOfGuesses|| o_userInputInt > maximumAmountOfGuesses )
@@ -25,30 +26,32 @@ namespace Ex02
                     o_errorMessage = "Input must be between 4 and 10.";
                     isValid = false;
                 }
+
             }
             else
             {
                 o_errorMessage = "Input must be a number.";
                 isValid = false;
-
             }
+
             return isValid;
         }
-        private bool isValidLength(string i_input)
+
+        private bool isValidLength(string i_input)//DONE
         {
-            bool validLength = false;
-            if (i_input.Length == k_validLengthForGuessInput)
-            {
-                validLength = true;
-            }
+            bool validLength = (i_input.Length == k_validLengthForGuessInput);
+            
             return validLength;
         }
-        private bool containsOnlyValidChars(string i_input)
+
+        private bool containsOnlyValidChars(string i_input)//DONE
         {
             bool validChars = true;
+
             for (int i = 0; i < i_input.Length; i++)
             {
                 char currentLetter = char.ToUpper(i_input[i]);
+
                 if (i % 2 == 1)
                 {
                     if (currentLetter != ' ')
@@ -56,6 +59,7 @@ namespace Ex02
                         validChars = false;
                         break;
                     }
+
                 }
                 else
                 {
@@ -64,24 +68,27 @@ namespace Ex02
                         validChars = false;
                         break;
                     }
+
                 }
+
             }
+
             return validChars;
         }
 
-
-
-        private bool stringHasNoDuplicates(string i_input)
+        private bool stringHasNoDuplicates(string i_input)//DONE
         {
             char[] sequence = Tosequence(i_input);
+
             return m_sequenceValidator.SequenceHasNoDuplicates(sequence);
         }
 
-        internal char[] Tosequence(string i_input)
+        internal char[] Tosequence(string i_input)//DONE
         {
-            char[] sequence = new char[4];
+            char[] sequence = new char[BullseyeSingleGameLogic.k_amountOfItemsInSequence];
             int sequenceIndex = 0;
-            for (int i = 0; i < i_input.Length && i <= k_validLengthForGuessInput; i++)
+
+            for (int i = 0; i < i_input.Length && i <= k_validLengthForGuessInput; i++) 
             {
                 if (i % 2 == 0)
                 {
@@ -90,40 +97,36 @@ namespace Ex02
                 }
 
             }
+
             return sequence;
         }
 
-        public bool IsValidYesOrNoInput(string i_userInput)
+        public bool IsValidYesOrNoInput(string i_userInput)//DONE
         {
-            bool isValid = false;
-            if (i_userInput == "Y" || i_userInput == "N")
-            {
-                isValid = true;
-            }
+            bool isValid = (i_userInput == "Y" || i_userInput == "N");
+
             return isValid;
         }
 
-        public bool IsValidUserInput(string i_input, out string o_errorMessage)
+        public bool IsValidUserInput(string i_input, out string o_errorMessage)//DONE
         {
             bool isValid = true;
+
             if (i_input == "Q")
             {
                 o_errorMessage = string.Empty;
                 isValid = true;
             }
-
             else if (isValidLength(i_input) == false)
             {
                 o_errorMessage = "Input must be 4 letters separated by spaces (e.g., A B C D).";
                 isValid = false;
             }
-
             else if (containsOnlyValidChars(i_input) == false)
             {
                 o_errorMessage = "Input must contain only letters A-H and spaces between them.";
                 isValid = false;
             }
-
             else if (stringHasNoDuplicates(i_input) == false)
             {
                 o_errorMessage = "Input must not contain duplicate letters.";
@@ -136,5 +139,7 @@ namespace Ex02
 
             return isValid;
         }
+
     }
+
 }

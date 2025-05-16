@@ -14,6 +14,7 @@ namespace Ex02
         public const int k_minumumAmountOfGuesses = 4;
         public const int k_amountOfOptionsForSequanceItems = 8;
 
+        public List<Guess> m_guessList = new List<Guess>();
         InputValidator m_sequenceValidator = new InputValidator();
         private Random m_sequenceItemRandomizer = new Random();
         private char[] m_secretsequence = new char[k_amountOfItemsInSequence];
@@ -31,38 +32,34 @@ namespace Ex02
             {
                 m_guess = i_guess;
             }
+
         }
 
-        public bool checkWin()
+        public bool checkWin()//DONE
         {
-            bool isWin = false;
-            if (m_guessList.Last().Hits == k_amountOfItemsInSequence)
-            {
-                isWin = true;
-            }
+            bool isWin = (m_guessList.Last().Hits == k_amountOfItemsInSequence);
+
             return isWin;
         }
 
-        public List<Guess> m_guessList = new List<Guess>(); 
-
-        public void setSecretsequence(char[] i_sequenceItems)
+        public void setSecretsequence(char[] i_sequenceItems)//DONE
         {
             m_secretsequence = i_sequenceItems;
         }
 
-        public void SetUpNewGame()
+        public void SetUpNewGame()//DONE
         {
             CurrentGuessCount = 0;
             m_guessList.Clear();
         }
 
-
-       public void CheckGuess(char[] i_guess)
+       public void CheckGuess(char[] i_guess)//DONE
         {
             int hits = 0;
             int misses = 0;
-            CurrentGuessCount++;
             Guess guess = new Guess(i_guess);
+
+            CurrentGuessCount++;
             for (int inputIndex = 0; inputIndex<i_guess.Length; inputIndex++)
             {
                 for(int SequenceIndex = 0; SequenceIndex < i_guess.Length; SequenceIndex++)
@@ -77,42 +74,50 @@ namespace Ex02
                         {
                             misses++;
                         }
+
                     }
+
                 }
+
             }
+
             guess.Misses = misses;
             guess.Hits = hits;
             m_guessList.Add(guess);
-        }
+       }
 
-        public bool checkLoss()
+        public bool checkLoss()//DONE
         {
-            bool didPlayerLose = false;
-            if (MaxGuesses-1 < CurrentGuessCount)
-            {
-                didPlayerLose= true;
-            }
+            bool didPlayerLose = MaxGuesses - 1 < CurrentGuessCount;
+            
             return didPlayerLose;
         }
 
-        public void generatesequence()
+        public void generatesequence()//DONE
         {
             char[] sequence;
+
             do
             {
                 sequence = createRandomSequence();
-            } while (m_sequenceValidator.SequenceHasNoDuplicates(sequence) == false);
+            } 
+            while (m_sequenceValidator.SequenceHasNoDuplicates(sequence) == false);
+
             m_secretsequence = sequence;
         }
 
-        private char[] createRandomSequence()
+        private char[] createRandomSequence()//DONE
         {
             char[] sequence = new char[k_amountOfItemsInSequence];
+
             for (int i = 0; i < sequence.Length; i++)
             {
                 sequence[i] = (char)m_sequenceItemRandomizer.Next('A', 'I');
             }
+
             return sequence;
         }
+
     }
+
 }
