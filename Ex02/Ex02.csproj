@@ -36,11 +36,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BullseyeSingleGameLogic.cs" />
-    <Compile Include="BullseyeGameManager.cs" />
-    <Compile Include="InputValidator.cs" />
+    <Compile Include="GameLogic.cs" />
+    <Compile Include="ConsoleInputValidaor.cs" />
+    <Compile Include="SequenceValidator.cs" />
     <Compile Include="Project.cs" />
-    <Compile Include="UserInterfaceConsole.cs" />
+    <Compile Include="ConsoleUI.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Ex02.ConsoleUtils">
+      <HintPath>..\..\..\..\OneDrive\Desktop\לימודים\C# .NET\סי שארפ מטלה 2\DN_2025B_Ex02\Ex02.ConsoleUtils.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

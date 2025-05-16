@@ -6,30 +6,29 @@ using System.Threading.Tasks;
 
 namespace Ex02
 {
-    internal class Project
+    public class Project
     {
 
         public static void Main()
         {
-            BullseyeGameManager Game = new BullseyeGameManager();
+            ConsoleUI game = new ConsoleUI();
 
+            game.Run();
         }
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
