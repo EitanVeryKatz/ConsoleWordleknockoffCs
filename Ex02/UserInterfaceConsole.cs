@@ -71,19 +71,20 @@ namespace Ex02
         private bool checkIfGameOver()
         {
             bool gameEnded = false;
-            if(m_gameLogic.checkWin() == true)
+            if (m_gameLogic.checkWin() == true)
             {
                 gameEnded = true;
-                Console.WriteLine("win");
-            }else if(m_gameLogic.checkLoss())
+                Console.WriteLine("You guessed after {0} steps!");
+            }
+            else if (m_gameLogic.checkLoss())
             {
-                gameEnded=true;
-                Console.WriteLine("loss");
+                gameEnded = true;
+                Console.WriteLine("No more guesses allowed. You lost.");
             }
             return gameEnded;
         }
-        
-        
+
+
 
         private void askPlayerForNumOfGuesses()
         {
@@ -162,10 +163,18 @@ namespace Ex02
                     {
                         result.Append("X ");
                     }
+
                     // Pad or trim result to fit nicely
                     string resultStr = result.ToString().TrimEnd().PadRight(5);
+                    string padding = "   ";
+                    if (result.Length == 8)
+                    {
+                        //get rid of the last space
+                        
+                        padding = " ";
+                    }
 
-                    Console.WriteLine(" {0}   |", resultStr);
+                    Console.WriteLine(" {0}{1}|", resultStr,padding);
                 }
                 else
                 {
@@ -175,6 +184,7 @@ namespace Ex02
             }
         }
 
-       
+
+
     }
 }
