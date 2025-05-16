@@ -106,9 +106,11 @@ namespace Ex02
             
             Console.WriteLine("Please type your next guess<A B C D> or 'Q' to quit:");
             string userInputStr = Console.ReadLine();
-            while (m_validator.IsValidUserInput(userInputStr) == false)
+            string errorMessage;
+            while (m_validator.IsValidUserInput(userInputStr,out errorMessage) == false)
             {
                 printBoard();
+                Console.WriteLine(errorMessage);
                 Console.WriteLine("Please type your next guess<A B C D> or 'Q' to quit:");
                 userInputStr = Console.ReadLine();
             }

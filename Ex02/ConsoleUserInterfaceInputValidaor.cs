@@ -79,13 +79,37 @@ namespace Ex02
             return isValid;
         }
 
-        internal bool IsValidUserInput(string i_userInputStr)
+        public bool IsValidUserInput(string i_input, out string o_errorMessage)
         {
-            bool isValid = false;
-            if(i_userInputStr == "Q" || (isValidLength(i_userInputStr) && containsOnlyValidChars(i_userInputStr) && stringHasNoDuplicates(i_userInputStr)))
+            bool isValid = true;
+            if (i_input == "Q")
             {
+                o_errorMessage = string.Empty;
                 isValid = true;
             }
+
+            else if (isValidLength(i_input) == false)
+            {
+                o_errorMessage = "Input must be 4 letters separated by spaces (e.g., A B C D).";
+                isValid = false;
+            }
+
+            else if (containsOnlyValidChars(i_input) == false)
+            {
+                o_errorMessage = "Input must contain only letters A-H and spaces between them.";
+                isValid = false;
+            }
+
+            else if (stringHasNoDuplicates(i_input) == false)
+            {
+                o_errorMessage = "Input must not contain duplicate letters.";
+                isValid = false;
+            }
+            else
+            {
+                o_errorMessage = string.Empty;
+            }
+
             return isValid;
         }
     }
