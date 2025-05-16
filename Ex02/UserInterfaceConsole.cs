@@ -13,8 +13,6 @@ namespace Ex02
 
         private ConsoleUserInterfaceInputValidaor m_validator = new ConsoleUserInterfaceInputValidaor();
         private BullseyeSingleGameLogic m_gameLogic = new BullseyeSingleGameLogic();
-        private bool m_winFlag = false;
-        private bool m_lossFlag = false;
         
 
         private void setUpSingleGame()
@@ -50,9 +48,6 @@ namespace Ex02
                 //need to update check guess
                 printBoard();
                 
-                //uses data from game logic that will sore info
-                //of past guesses and hits and misses and shit
-                //to print current state of game
                 if (checkIfGameOver())
                 //if game ended
                 {
@@ -74,7 +69,7 @@ namespace Ex02
             if (m_gameLogic.checkWin() == true)
             {
                 gameEnded = true;
-                Console.WriteLine("You guessed after {0} steps!");
+                Console.WriteLine("You guessed after {0} steps!",m_gameLogic.CurrentGuessCount);
             }
             else if (m_gameLogic.checkLoss())
             {
@@ -90,13 +85,17 @@ namespace Ex02
         {
             Console.WriteLine("Please enter amount of guesses: ");
             string userInputStr = Console.ReadLine();
+            //input validator will check if input is valid
             int userInputInt;
-            while (int.TryParse(userInputStr, out userInputInt) == false|| userInputInt>10 || userInputInt<4)
+            
+
+            while (m_validator.IsGuessAmountValid(userInputStr, out string errorMessage, out userInputInt)==false)//amount of guesses not valid
             {
-                Console.WriteLine("Invalid input...");
+                   Console.WriteLine(errorMessage);
                 Console.WriteLine("Please enter amount of guesses: ");
                 userInputStr = Console.ReadLine();
             }
+
             m_gameLogic.MaxGuesses = userInputInt;
 
         }

@@ -9,7 +9,27 @@ namespace Ex02
     internal class ConsoleUserInterfaceInputValidaor
     {
         InputValidator m_sequenceValidator = new InputValidator();
+        public bool IsGuessAmountValid(string i_userInputStr, out string o_errorMessage, out int o_userInputInt)
+        {
+            o_errorMessage = string.Empty;
+            bool isValid = true;
+            bool isInteger = int.TryParse(i_userInputStr, out o_userInputInt);
+            if (isInteger)
+            {
+                if (o_userInputInt < 4 || o_userInputInt > 10)
+                {
+                    o_errorMessage = "Input must be between 4 and 10.";
+                    isValid = false;
+                }
+            }
+            else
+            {
+                o_errorMessage = "Input must be a number.";
+                isValid = false;
 
+            }
+            return isValid;
+        }
         private bool isValidLength(string i_input)
         {
             bool validLength = false;
