@@ -14,21 +14,19 @@ namespace Ex02
 
         internal bool SequenceHasNoDuplicates(char[] i_input) { 
             bool hasNoDuplicates = true;
-            bool[] arrayOfLetters=new bool[BullseyeSingleGameLogic.k_amountOfOptionsForSequanceItems];
-            for(int i = 0;i < 4;i++)
+            Dictionary<char,bool> ExistingCharsInSequence = new Dictionary<char,bool>();
+            for (int i = 0; i < BullseyeSingleGameLogic.k_amountOfItemsInSequence; i++)
             {
                 char currentLetterToCheck = char.ToUpper(i_input[i]);
-                int indexOfLetter = currentLetterToCheck - 'A';
-                if (arrayOfLetters[indexOfLetter] == true)
+                if (ExistingCharsInSequence.ContainsKey(currentLetterToCheck))
                 {
                     hasNoDuplicates = false;
                     break;
                 }
                 else
                 {
-                    arrayOfLetters[indexOfLetter] = true;
+                    ExistingCharsInSequence[currentLetterToCheck] = true;
                 }
-
             }
             return hasNoDuplicates;
         }
