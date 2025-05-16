@@ -83,7 +83,7 @@ namespace Ex02
         public bool checkLoss()
         {
             bool lost = false;
-            if (MaxGuesses < CurrentGuessCount)
+            if (MaxGuesses-1 < CurrentGuessCount)
             {
                 lost= true;
             }
