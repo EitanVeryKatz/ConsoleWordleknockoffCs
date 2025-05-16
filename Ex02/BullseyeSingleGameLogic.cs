@@ -9,13 +9,17 @@ namespace Ex02
 {
     internal class BullseyeSingleGameLogic
     {
+        public const int k_amountOfItemsInSequence = 4;
+        public const int k_maximumAnountOfGuesses = 10;
+        public const int k_minumumAmountOfGuesses = 4;
+
         InputValidator m_sequenceValidator = new InputValidator();
         private Random m_sequenceItemRandomizer = new Random();
-        private char[] m_secretSequance = new char[4];
+        private char[] m_secretSequance = new char[k_amountOfItemsInSequence];
         public int MaxGuesses { get; set; }
         public int CurrentGuessCount { get; private set; }
 
-        public class Guess //public for testing
+        public class Guess 
         {
             internal char[] m_guess;
             internal int Hits { get; set; }
@@ -31,14 +35,14 @@ namespace Ex02
         public bool checkWin()
         {
             bool isWin = false;
-            if (m_guessList.Last().Hits == 4)
+            if (m_guessList.Last().Hits == k_amountOfItemsInSequence)
             {
                 isWin = true;
             }
             return isWin;
         }
 
-        public List<Guess> m_guessList = new List<Guess>(); //public for testing
+        public List<Guess> m_guessList = new List<Guess>(); 
 
         public void setSecretSequance(char[] i_sequanceItems)
         {
@@ -92,7 +96,7 @@ namespace Ex02
 
         public void generateSequance()
         {
-            char[] sequance = new char[4];
+            char[] sequance = new char[k_amountOfItemsInSequence];
             do
             {
                 for (int i = 0; i < sequance.Length; i++)
